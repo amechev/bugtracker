@@ -1,0 +1,14 @@
+<form class="search" [formGroup]="formGroup">
+  <mat-form-field class="search-form-field">
+    <input matInput #searchTerm
+           class="input"
+           type="text" placeholder="Поиск"
+           formControlName="inputValue" [autoFocus]>
+  </mat-form-field>
+  <button type="submit" class="button _hidden"></button>
+  <button *ngIf="formGroup.controls['inputValue'].value"
+          (click)="onClear()"
+          class="button _clear">
+    <mat-icon class="icon _clear">clear</mat-icon>
+  </button>
+</form>

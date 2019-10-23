@@ -1,0 +1,68 @@
+variables:
+  IMAGE: "${BUILDS_REGISTRY_URL}/platform/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}"
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - docker login -u "${BUILDS_REGISTRY_USER}" -p "${BUILDS_REGISTRY_PASS}" "${BUILDS_REGISTRY_URL}"
+
+staging-build:
+  stage: build
+  script:
+    - docker build -t "${IMAGE}" -f Dockerfile.dev .
+    - docker push "${IMAGE}"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - ./docker-compose.yml
+  tags:
+    - npm
+  only:
+    - staging
+
+
+staging-deploy:
+  stage: deploy
+  dependencies:
+    - staging-build
+  script:
+    - export "DEBUG=true"
+    - export "PLATFORM_DOMAIN_BASE=${STAGING_DOMAIN}"
+    - docker stack deploy -c docker-compose.yml --with-registry-auth --prune "$CI_PROJECT_NAME"
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  tags:
+    - npm
+  only:
+    - staging
+
+production-build:
+  stage: build
+  script:
+    - docker build -t "${IMAGE}" .
+    - docker push "${IMAGE}"
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - ./docker-compose.yml
+  tags:
+    - npm-production
+  only:
+    - production
+
+production-deploy:
+  stage: deploy
+  dependencies:
+    - production-build
+  script:
+    - export "DEBUG=false"
+    - export "PLATFORM_DOMAIN_BASE=${PRODUCTION_DOMAIN}"
+    - docker stack deploy -c docker-compose.yml --with-registry-auth --prune "$CI_PROJECT_NAME"
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  tags:
+    - npm-production
+  only:
+    - production

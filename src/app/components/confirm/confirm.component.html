@@ -1,0 +1,17 @@
+<div class="blur-box">
+  <mat-card>
+    <h3 class="title">{{ title }}</h3>
+    <div class="confirm-buttons">
+      <button mat-flat-button [autoFocus]
+              class="button _blue"
+              (click)="confirm.emit(true);">
+        {{ confirmTitle }}
+      </button>
+      <button mat-flat-button
+              class="button"
+              (click)="cancel.emit(true);">
+        {{ cancelTitle }}
+      </button>
+    </div>
+  </mat-card>
+</div>

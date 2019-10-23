@@ -1,0 +1,36 @@
+@import "mixins";
+@import 'fonts';
+@import "variables";
+
+.blur-box {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mat-card {
+  padding: 20px 30px;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 45px;
+  @include font-stack('Roboto');
+}
+
+.confirm-buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.button + .button {
+  margin-left: 16px;
+}

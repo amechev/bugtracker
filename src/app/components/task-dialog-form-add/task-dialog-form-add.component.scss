@@ -1,0 +1,97 @@
+@import "variables";
+@import "mixins";
+$height: 590px;
+
+:host {
+  display: block;
+  width: 360px;
+  min-height:$height;
+  @include font-stack('Roboto');
+}
+
+.body {
+  display: flex;
+  flex: 1 1 200px;
+  flex-flow: row nowrap;
+  justify-content: stretch;
+  overflow-x: auto;
+  height: $height;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding-right: 40px;
+  background-color: $color-blue;
+  color: $color-white;
+
+  .button {
+    color: $color-white;
+  }
+}
+
+.tools {
+  &._left {
+    width: 40px;
+  }
+  &._right {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 540px;
+  overflow: auto;
+  overflow-y: overlay;
+}
+
+.name,
+.description{
+  display: block;
+  margin-bottom: 16px;
+}
+
+.box {
+  display: block;
+  padding: 16px;
+
+  &._file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+}
+
+.important {
+  font-size: 14px;
+}
+
+.button {
+  height: 50px;
+  &._continue {
+    display: block;
+    width: 100%;
+  }
+  &._submit {
+    display: block;
+    width: 100%;
+  }
+}
+
+.important {
+  margin-bottom: 16px;
+}

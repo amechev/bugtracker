@@ -1,0 +1,60 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  display: block;
+  width: 360px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding-right: 40px;
+  background-color: $color-blue;
+  color: $color-white;
+
+  .button {
+    color: $color-white;
+  }
+}
+
+.tools {
+  &._left {
+    width: 40px;
+  }
+  &._right {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.button._circle{
+  display: block;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid $color-border;
+
+  &:hover {
+    background-color: $color-bg-gray;
+  }
+}
+
+.search {
+  display: block;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.content {
+  max-height: 540px;
+  width: 360px;
+  overflow-y: auto;
+}

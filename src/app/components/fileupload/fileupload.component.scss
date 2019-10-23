@@ -1,0 +1,78 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.img {
+  max-width: 100%;
+}
+
+.button._close {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: $color-white;
+}
+
+.file {
+  margin-bottom: 16px;
+
+  &:hover {
+    .button {
+      display: block;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.file-label,
+.file {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(180px - 32px + 8px);
+  height: calc(180px - 32px + 8px);
+  border: 1px solid $color-blue;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+
+  .file-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: $color-blue;
+  }
+
+  .txt {
+    font-size: 12px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}

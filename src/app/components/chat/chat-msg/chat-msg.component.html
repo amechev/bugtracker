@@ -1,0 +1,26 @@
+<!--Показывать, только над группой не прочитаных-->
+<!--<div class="unread" *ngIf="chatMsg.showDate">Непрочитанные сообщения</div>-->
+
+<div class="date" *ngIf="isMsgToday()">Сегодня
+</div>
+
+<div class="date" *ngIf="isMsgYesterday()">Вчера</div>
+
+<div class="date" *ngIf="chatMsg.showDate && !isMsgToday() && !isMsgYesterday()">{{chatMsg.createdAt | date: 'd.LL.y'}}
+</div>
+
+<li class="msg-frame"
+    [ngClass]="{'mine': chatMsg.userId === currentUserId, '_big-margin': chatMsg.showAvatar || chatMsg.showDate}">
+    <img *ngIf="chatMsg.showAvatar && chatMsg.userId !== currentUserId" class="avatar"
+         [src]="config.getUserPhoto(chatMsg.userId)">
+    <div class="user" *ngIf="chatMsg.showAvatar && chatMsg.userId !== currentUserId">{{chatMsg.userShortName}}</div>
+    <p class="text">{{chatMsg.message}}</p>
+    <div class="info">
+        <span class="time-mark">{{chatMsg.createdAt | date: 'HH:mm'}}</span>
+        <!--логика для галочек отправки/прочтения-->
+       <!-- <mat-icon *ngIf="" class="send">done
+        </mat-icon>-->
+        <mat-icon *ngIf="chatMsg.userId === currentUserId" class="send">done_all</mat-icon>
+    </div>
+    <span *ngIf="chatMsg.isSent===false" class="material-icons error">error</span>
+</li>

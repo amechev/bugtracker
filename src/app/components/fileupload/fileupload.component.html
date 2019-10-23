@@ -1,0 +1,19 @@
+<ng-container *ngFor="let item of files; let i = index">
+  <div class="file">
+    <img class="img" [src]="getImageUrl(item.name)">
+
+    <button mat-icon-button
+            class="button _close"
+            (click)="onRemoeImgClick(item.id, i)"
+            title="Удалить фото">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</ng-container>
+
+<label class="file-label" title="Прикрепить фото">
+  <mat-icon class="file-icon">camera_enhance</mat-icon>
+  <span class="txt">Прикрепить фото</span>
+  <input type="file" (change)="onChangeFile($event, fileInput)" #fileInput
+         class="file-input">
+</label>

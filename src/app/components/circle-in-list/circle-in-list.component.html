@@ -1,0 +1,7 @@
+<img class="logo"
+     [src]="getLogoPhoto()"
+     [alt]="circle.name">
+<div class="info">
+  <span class="name" [innerHTML]="circle.name | highlight : searchTerm"></span>
+</div>
+

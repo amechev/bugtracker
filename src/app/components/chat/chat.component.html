@@ -1,0 +1,35 @@
+<div class="chats" *ngIf="isLoaded">
+    <ul class="chats__list" #chatList
+        infinite-scroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollUpDistance]="2"
+        [infiniteScrollThrottle]="10"
+        [scrollWindow]="false"
+        (scrolledUp)="onScrollUp()">
+        <div class="chats-inner">
+            <app-chat-msg *ngFor="let chatMsg of chatData | slice: firstMsg : lastMsg"
+                          [chatMsg]="chatMsg"
+                          [currentUserId]="myId">
+            </app-chat-msg>
+        </div>
+    </ul>
+    <span *ngIf="!chatData.length" class="chats__empty">
+        Начните обсуждение
+    </span>
+    <form class="form" [formGroup]="ngForm" (ngSubmit)="sendMessage()">
+        <textarea class="input" required
+                  #input
+                  formControlName="message" name="message" placeholder="Сообщение..."
+                  (keydown)="submitOnEnter()"
+                  (input)="textareaResize()">
+        </textarea>
+        <button class="send" mat-icon-button type="submit" (click)="sendMessage()"
+                [disabled]="ngForm.invalid">
+            <mat-icon class="material-icons">
+                send
+            </mat-icon>
+        </button>
+    </form>
+</div>
+
+<app-spinner [isSpinnerOn]="!isLoaded"></app-spinner>

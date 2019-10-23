@@ -1,0 +1,45 @@
+@import "variables";
+@import "mixins";
+
+.search {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.search-form-field {
+  width: 100%;
+}
+
+.icon {
+  &._clear {
+    position: relative;
+    left: 0;
+    font-size: 18px;
+    color: $color-grey;
+  }
+}
+
+.button {
+  &._hidden {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+  &._clear {
+    position: absolute;
+    right: 16px;
+    padding: 0;
+    margin: 0;
+    height: 18px;
+    width: 18px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

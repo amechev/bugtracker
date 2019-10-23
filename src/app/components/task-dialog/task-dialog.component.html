@@ -1,0 +1,50 @@
+<ng-container *ngIf="task.id">
+  <header class="header" *ngIf="task.id">
+    <div class="header__main">
+      <h2 class="title">Задача № {{ task.number }} от {{ task.createdAt | date: 'dd.LL.y' }}</h2>
+      <span class="author">Автор: {{ getAuthorName() }}</span>
+    </div>
+    <div class="toolbar">
+      <button mat-icon-button class="button close" color="accent" (click)="closeDialog()">
+        <mat-icon aria-label="close">close</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <div class="body">
+    <app-task-dialog-form-edit [task]="task"></app-task-dialog-form-edit>
+    <app-chat class="chats" [contractId]="task.id"></app-chat>
+  </div>
+</ng-container>
+
+
+<div class="body _new" *ngIf="!task.id">
+  <button mat-icon-button class="button _close" color="accent" (click)="closeDialog()">
+    <mat-icon aria-label="close">close</mat-icon>
+  </button>
+
+  <mat-horizontal-stepper [linear]="true" #stepper disableRipple>
+    <mat-step>
+      <app-task-dialog-circle *ngIf="!circle && circles"
+                              [circles]="circles"
+                              (onCircleSelect)="selectCircle($event); goForward(stepper)"></app-task-dialog-circle>
+    </mat-step>
+
+    <mat-step>
+      <app-task-dialog-form-add *ngIf="circle"
+                                [circle]="circle"
+                                (onClearCircle)="onClearCircle(); goBack(stepper)"
+                                (onDescriptionDone)="onDescriptionDone($event)"></app-task-dialog-form-add>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+  <app-spinner [isSpinnerOn]="true" *ngIf="!circles"></app-spinner>
+
+
+</div>
+
+
+
+
+

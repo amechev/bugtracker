@@ -1,0 +1,46 @@
+<header class="header">
+  <div class="tools _left">
+    <button mat-icon-button
+            class="button _back"
+            color="accent"
+            (click)="onBackClick()">
+      <mat-icon aria-label="chevron_left">chevron_left</mat-icon>
+    </button>
+  </div>
+
+  <h2 class="title">
+    {{ circle.name }}
+  </h2>
+
+  <div class="tools _right"></div>
+</header>
+<div class="content">
+
+</div>
+<form class="form" [formGroup]="formGroup">
+  <div class="box">
+    <mat-form-field class="name">
+      <input matInput
+             class="input"
+             placeholder="Краткое описание проблемы"
+             formControlName="name"
+             [required]="true">
+    </mat-form-field>
+
+    <mat-form-field class="description">
+          <textarea matInput class="input"
+                    formControlName="description"
+                    placeholder="Подробное описсние проблемы"></textarea>
+    </mat-form-field>
+
+    <mat-slide-toggle class="important"
+                      formControlName="isImportant">Важно</mat-slide-toggle>
+
+    <app-fileupload (onFilesChange)="onFilesChange($event)"></app-fileupload>
+  </div>
+
+  <div class="box">
+    <button mat-flat-button class="button _blue _continue" (click)="onSubmit()">Сохранить</button>
+  </div>
+
+</form>

@@ -1,0 +1,76 @@
+<app-header (newTaskClick)="openDialog(createNewTask())"
+            (searchChange)="onSearchChange($event)"
+            (filterChange)="onFilterChange($event)"></app-header>
+
+<section class="tasks-section">
+  <mat-table #mainTable
+             class="table"
+             mat-table
+             [dataSource]="dataSource"
+             multiTemplateDataRows
+             matSort
+             (matSortChange)="sortData($event)"
+             [matSortDirection] = "matSortDirection"
+             [matSortActive] = "matSortActive"
+             *ngIf="isLoaded">
+    <ng-container matColumnDef="number">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>№</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <div class="title"
+             [innerHTML]="element.number.toString() | highlight : searchTerm">
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Наименование</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <div class="title"
+             [innerHTML]="element.name | highlight : searchTerm">
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subdivision">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Круг исполнитель</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <div class="title" *ngIf="element.subdivision">
+          <app-circle-in-list [circle]="element.subdivision"
+                              [searchTerm]="searchTerm"></app-circle-in-list>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="performer">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Исполнитель</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <div class="title" *ngIf="element.performer"
+             [innerHTML]="element.performer.getFullName() | highlight : searchTerm">
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Дата</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <div class="title" *ngIf="element.createdAt"
+             [innerHTML]="element.createdAt | date: 'dd.LL.y' | highlight : searchTerm">
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Статус</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <div class="title" *ngIf="element.status"
+             [innerHTML]="element.status | highlight : searchTerm">
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row mat-row *matRowDef="let element; columns: displayedColumns;"
+             (click)="openDialog(element)"
+             class="example-expanded-row">
+    </mat-row>
+  </mat-table>
+</section>

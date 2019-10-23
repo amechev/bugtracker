@@ -1,0 +1,21 @@
+<div class="header">
+  <div class="sorts">
+    <mat-form-field class="sort">
+      <mat-select class="select"
+                  [placeholder]="'Показывать'"
+                  (selectionChange)="onSortChange($event)">
+        <mat-option [value]="null">Показывать все</mat-option>
+        <mat-option *ngFor="let item of types" [value]="item.type">
+          {{ item.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="toolbar">
+    <app-search class="toolbar__search" (textChange)="onSearchChange($event)"></app-search>
+    <button mat-flat-button class="button _blue" (click)="newTaskClick.emit()">
+      Создать
+    </button>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+@import "mixins";
+@import "variables";
+
+:host {
+  @include flex-column-stretch;
+  height: auto;
+}
+
+.toolbar {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.toolbar__search {
+  margin-right: 16px;
+}
+
+.header {
+  flex: 0 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 12px 20px 12px 40px;
+  background-color: $color-bg-gray;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.select {
+  @include filter();
+}

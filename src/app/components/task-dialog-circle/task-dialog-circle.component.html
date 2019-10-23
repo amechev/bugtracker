@@ -1,0 +1,41 @@
+<header class="header">
+  <div class="tools _left">
+  </div>
+
+  <h2 class="title">
+    Выберите круг исполнитель
+  </h2>
+
+  <div class="tools _right">
+    <button mat-icon-button
+            *ngIf="!circle"
+            class="button _search"
+            color="accent"
+            (click)="onSearchOpen()">
+      <mat-icon aria-label="search">search</mat-icon>
+    </button>
+  </div>
+</header>
+<div class="content">
+  <div class="content__inner">
+    <app-search class="search"
+                (textChange)="onSearch($event)"
+                *ngIf="!circle && isSearchOpen"></app-search>
+    <ng-container *ngFor="let item of sortedCircles">
+      <button mat-flat-button class="button _circle"
+              (click)="onButtonClick(item)"
+              *ngIf="item.active">
+        <app-circle-in-list *ngIf="circles"
+                            [circle]="item"
+                            [searchTerm]="searchTerm"></app-circle-in-list>
+      </button>
+    </ng-container>
+  </div>
+</div>
+
+
+
+
+
+
+

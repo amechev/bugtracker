@@ -1,0 +1,7 @@
+# Package
+FROM base-image-node11:1.0
+EXPOSE 8080
+WORKDIR /home/node
+COPY ./dist/ ./
+ENTRYPOINT ["angular-http-server", "--path"]
+CMD ["./bugtracker"]

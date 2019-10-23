@@ -1,0 +1,9 @@
+<div class="details">
+  <h3 class="details__title">{{ task.name }}</h3>
+  <span *ngIf="task.description" class="txt">{{ task.description }}</span>
+</div>
+
+<div class="box">
+  <app-fileupload [files]="task.files" (onFilesChange)="onFilesChange($event)"></app-fileupload>
+</div>
+

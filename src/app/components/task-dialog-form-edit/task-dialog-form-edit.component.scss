@@ -1,0 +1,30 @@
+@import "variables";
+@import "mixins";
+$height: 590px;
+
+:host {
+  display: block;
+  width: 360px;
+  min-height:$height;
+  @include font-stack('Roboto');
+}
+
+.details {
+  padding: 16px 16px 0 ;
+}
+
+.details__title {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.txt {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.box {
+  display: block;
+  padding: 16px;
+}

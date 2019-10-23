@@ -1,0 +1,19 @@
+version: "3.6"
+
+services:
+  # bugtracker Frontend
+  transfert-1c:
+    image: "${IMAGE}"
+    command: ./bugtracker
+    deploy:
+      labels:
+        traefik.port: 8080
+        traefik.enable: "true"
+        traefik.docker.network: platform_public
+        traefik.frontend.rule: "Host: bugtracker.${PLATFORM_DOMAIN_BASE}"
+    networks:
+      - platform_public
+networks:
+  # Platform Public Network
+  platform_public:
+    external: true

@@ -1,0 +1,82 @@
+@import "variables";
+@import "mixins";
+$height: 590px;
+
+:host {
+  display: block;
+  min-height:$height;
+  @include font-stack('Roboto');
+}
+
+.body {
+  position: relative;
+  display: flex;
+  flex: 1 1 200px;
+  flex-flow: row nowrap;
+  justify-content: stretch;
+  overflow-x: auto;
+  height: $height;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 0 0 0 16px;
+  background-color: $color-white;
+}
+
+.header__main {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 500;
+}
+
+.author {
+  color: $color-input-title;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.chats {
+  width: 350px;
+  flex: 0 0 350px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: $color-bg-gray;
+}
+
+.button {
+  &._close {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    color: $color-white;
+    z-index: 50;
+  }
+}
+
+mat-horizontal-stepper::ng-deep {
+  .mat-horizontal-stepper-header-container {
+    display: none;
+    padding: 0;
+  }
+
+  .mat-horizontal-content-container {
+    padding: 0;
+  }
+}
+
+.mat-stepper-horizontal {
+  background: linear-gradient($color-blue 50px, $color-white 50px 100%);
+}
